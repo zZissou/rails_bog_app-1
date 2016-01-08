@@ -21,7 +21,7 @@ Or maybe Sir Didymus and The Bog of Eternal Stench...
 
 ## CRUD and REST Reference
 
-REST stands for **REpresentational State Transfer**. We will strictly adhere to RESTful routing for Rails resources, and Rails sets up a lot of it for us.
+REST stands for **REpresentational State Transfer**. We will strictly adhere to RESTful routing for Rails.
 
 | Verb | Path | Action | Used for |
 | :--- | :--- | :--- | :--- |
@@ -100,11 +100,7 @@ Your routes tell your app how to direct **HTTP requests** to **controller action
 Rails.application.routes.draw do
   root "creatures#index"
 
-  # use the resources method to have Rails make an index route for creatures
-  resources :creatures, only: [:index]
-
-  # resources :creatures, only: [:index] is equivalent to:
-  # get "/creatures", to: "creatures#index"
+  get "/creatures", to: "creatures#index"
 end
 ```
 
@@ -202,7 +198,7 @@ Go to `localhost:3000` in the browser. What do you see on the page? If you haven
 
 #### 1. Define a route for the `new` creature form
 
-The Rails convention is to make a form for new creatures at the `/creatures/new` path in our browser. Use `resources` to add this route:
+The Rails convention is to make a form for new creatures at the `/creatures/new` path in our browser.
 
 ```ruby
 #
@@ -212,11 +208,8 @@ The Rails convention is to make a form for new creatures at the `/creatures/new`
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  resources :creatures, only: [:index, :new]
-
-  # resources :creatures, only: [:index, :new] is equivalent to:
-  # get "/creatures", to: "creatures#index"
-  # get "/creatures/new", to: "creatures#new"
+  get "/creatures", to: "creatures#index"
+  get "/creatures/new", to: "creatures#new"
 end
 ```
 
@@ -271,12 +264,9 @@ Your new creature form has `action="/creatures"` and `method="POST"`. The `POST 
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  resources :creatures, only: [:index, :new, :create]
-
-  # resources :creatures, only: [:index, :new, :create] is equivalent to:
-  # get "/creatures", to: "creatures#index"
-  # get "/creatures/new", to: "creatures#new"
-  # post "/creatures", to: "creatures#create"
+  get "/creatures", to: "creatures#index"
+  get "/creatures/new", to: "creatures#new"
+  post "/creatures", to: "creatures#create"
 end
 ```
 
@@ -362,13 +352,10 @@ First, define a `show` route:
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  resources :creatures, only: [:index, :new, :create, :show]
-
-  # resources :creatures, only: [:index, :new, :create, :show] is equivalent to:
-  # get "/creatures", to: "creatures#index"
-  # get "/creatures/new", to: "creatures#new"
-  # post "/creatures", to: "creatures#create"
-  # get "/creatures/:id", to: "creatures#show"
+  get "/creatures", to: "creatures#index"
+  get "/creatures/new", to: "creatures#new"
+  post "/creatures", to: "creatures#create"
+  get "/creatures/:id", to: "creatures#show"
 end
 ```
 
@@ -452,8 +439,6 @@ Editing a specific creature requires two methods:
 
 #### 1. Define a route for the `edit` creature form
 
-Use `resources` to define a route that displays the edit creature form:
-
 ```ruby
 #
 # config/routes.rb
@@ -462,14 +447,11 @@ Use `resources` to define a route that displays the edit creature form:
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  resources :creatures, only: [:index, :new, :create, :show, :edit]
-
-  # resources :creatures, only: [:index, :new, :create, :show, :edit] is equivalent to:
-  # get "/creatures", to: "creatures#index"
-  # get "/creatures/new", to: "creatures#new"
-  # post "/creatures", to: "creatures#create"
-  # post "/creatures/:id", to: "creatures#show"
-  # get "/creatures/:id/edit", to: "creatures#edit"
+  get "/creatures", to: "creatures#index"
+  get "/creatures/new", to: "creatures#new"
+  post "/creatures", to: "creatures#create"
+  get "/creatures/:id", to: "creatures#show"
+  get "/creatures/:id/edit", to: "creatures#edit"
 end
 ```
 
@@ -520,7 +502,7 @@ Go to `localhost:3000/creatures/1/edit` in the browser to see what it looks like
 
 #### 4. Define a route to `update` a specific creature
 
-The update route will use the `id` of the creature to be updated. In Express, you decided between `PUT /creatures/:id` and `PATCH /creatures/:id`, depending on the type of update you wanted to do. When you add `:update` to your `resources :creatures`, Rails creates both the `PUT` and the `PATCH` routes!
+The update route will use the `id` of the creature to be updated. In Express, you decided between `PUT /creatures/:id` and `PATCH /creatures/:id`, depending on the type of update you wanted to do. In Rails, we'll need to add BOTH `PUT /creatures/:id` and `PATCH /creatures/:id` to our routes.
 
 ```ruby
 #
@@ -530,16 +512,13 @@ The update route will use the `id` of the creature to be updated. In Express, yo
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  resources :creatures, only: [:index, :new, :create, :show, :edit, :update]
-
-  # resources :creatures, only: [:index, :new, :create, :show, :edit, :update] is equivalent to:
-  # get "/creatures", to: "creatures#index"
-  # get "/creatures/new", to: "creatures#new"
-  # post "/creatures", to: "creatures#create"
-  # get "/creatures/:id", to: "creatures#show"
-  # get "/creatures/:id/edit", to: "creatures#edit"
-  # put "/creatures/:id", to: "creatures#update"
-  # patch "/creatures/:id", to: "creatures#update"
+  get "/creatures", to: "creatures#index"
+  get "/creatures/new", to: "creatures#new"
+  post "/creatures", to: "creatures#create"
+  get "/creatures/:id", to: "creatures#show"
+  get "/creatures/:id/edit", to: "creatures#edit"
+  put "/creatures/:id", to: "creatures#update"
+  patch "/creatures/:id", to: "creatures#update"
 end
 ```
 
@@ -572,7 +551,7 @@ class CreaturesController < ApplicationController
 
     # update the creature
     creature.update_attributes(creature_params)
-    
+
     # redirect to show page for the updated creature
     redirect_to creature_path(creature)
     # redirect_to creature_path(creature) is equivalent to:
@@ -588,7 +567,7 @@ Test your `creatures#update` method in the browser by editing the creature with 
 
 #### 1. Define a route to `destroy` a specific creature
 
-Following a similar pattern to our other routes, Rails `resources` will generate a route to `destroy` (delete) a specific creature based on its `id`. The RESTful route it creates is `DELETE /creatures/:id`.
+Following a similar pattern to our other routes, create a route to `destroy` (delete) a specific creature based on its `id`.
 
 ```ruby
 #
@@ -598,34 +577,19 @@ Following a similar pattern to our other routes, Rails `resources` will generate
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  resources :creatures, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-
-  # resources :creatures, only: [:index, :new, :create, :show, :edit, :update, :destroy] is equivalent to:
-  # get "/creatures", to: "creatures#index"
-  # get "/creatures/new", to: "creatures#new"
-  # post "/creatures", to: "creatures#create"
-  # get "/creatures/:id", to: "creatures#show"
-  # get "/creatures/:id/edit", to: "creatures#edit"
-  # put "/creatures/:id", to: "creatures#update"
-  # patch "/creatures/:id", to: "creatures#update"
-  # delete "/creatures/:id", to: "creatures#destroy"
+  get "/creatures", to: "creatures#index"
+  get "/creatures/new", to: "creatures#new"
+  post "/creatures", to: "creatures#create"
+  get "/creatures/:id", to: "creatures#show"
+  get "/creatures/:id/edit", to: "creatures#edit"
+  put "/creatures/:id", to: "creatures#update"
+  patch "/creatures/:id", to: "creatures#update"
+  delete "/creatures/:id", to: "creatures#destroy"
 end
 ```
 
-At this point, you're using all the RESTful routes for creatures. Refactor your routes to reflect that you're using all the `resources` (remove the `only:` part):
+At this point, you're using all the RESTful routes for creatures.
 
-```ruby
-#
-# config/routes.rb
-#
-
-Rails.application.routes.draw do
-  root to: "creatures#index"
-  resources :creatures
-end
-```
-
-Run `rake routes` in your Terminal to check the routes `resources` generated for you.
 
 #### 2. Set up the creatures `destroy` action
 
@@ -651,7 +615,7 @@ class CreaturesController < ApplicationController
 
     # destroy the creature
     creature.destroy
-    
+
     # redirect to creatures index
     redirect_to creatures_path
     # redirect_to creatures_path is equivalent to:
