@@ -100,7 +100,8 @@ Your routes tell your app how to direct **HTTP requests** to **controller action
 Rails.application.routes.draw do
   root "creatures#index"
 
-  get "/creatures", to: "creatures#index"
+  get "/creatures", to: "creatures#index", as: "creatures"
+
 end
 ```
 
@@ -264,9 +265,10 @@ Your new creature form has `action="/creatures"` and `method="POST"`. The `POST 
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index"
-  get "/creatures/new", to: "creatures#new"
+  get "/creatures", to: "creatures#index", as: "creatures"
+  get "/creatures/new", to: "creatures#new", as: "new_creature"
   post "/creatures", to: "creatures#create"
+
 end
 ```
 
@@ -352,10 +354,10 @@ First, define a `show` route:
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index"
-  get "/creatures/new", to: "creatures#new"
+  get "/creatures", to: "creatures#index", as: "creatures"
+  get "/creatures/new", to: "creatures#new", as: "new_creature"
   post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show"
+  get "/creatures/:id", to: "creatures#show", as: "creature"
 end
 ```
 
@@ -447,11 +449,11 @@ Editing a specific creature requires two methods:
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index"
-  get "/creatures/new", to: "creatures#new"
+  get "/creatures", to: "creatures#index", as: "creatures"
+  get "/creatures/new", to: "creatures#new", as: "new_creature"
   post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show"
-  get "/creatures/:id/edit", to: "creatures#edit"
+  get "/creatures/:id", to: "creatures#show", as: "creature"
+  get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
 end
 ```
 
@@ -502,7 +504,7 @@ Go to `localhost:3000/creatures/1/edit` in the browser to see what it looks like
 
 #### 4. Define a route to `update` a specific creature
 
-The update route will use the `id` of the creature to be updated. In Express, you decided between `PUT /creatures/:id` and `PATCH /creatures/:id`, depending on the type of update you wanted to do. In Rails, we'll need to add BOTH `PUT /creatures/:id` and `PATCH /creatures/:id` to our routes.
+The update route will use the `id` of the creature to be updated. In Express, you decided between `PUT /creatures/:id` and `PATCH /creatures/:id`, depending on the type of update you wanted to do. In Rails, we'll need to add `PATCH /creatures/:id` only to our routes.
 
 ```ruby
 #
@@ -512,12 +514,11 @@ The update route will use the `id` of the creature to be updated. In Express, yo
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index"
-  get "/creatures/new", to: "creatures#new"
+  get "/creatures", to: "creatures#index", as: "creatures"
+  get "/creatures/new", to: "creatures#new", as: "new_creature"
   post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show"
-  get "/creatures/:id/edit", to: "creatures#edit"
-  put "/creatures/:id", to: "creatures#update"
+  get "/creatures/:id", to: "creatures#show", as: "creature"
+  get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
   patch "/creatures/:id", to: "creatures#update"
 end
 ```
@@ -577,12 +578,11 @@ Following a similar pattern to our other routes, create a route to `destroy` (de
 Rails.application.routes.draw do
   root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index"
-  get "/creatures/new", to: "creatures#new"
+  get "/creatures", to: "creatures#index", as: "creatures"
+  get "/creatures/new", to: "creatures#new", as: "new_creature"
   post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show"
-  get "/creatures/:id/edit", to: "creatures#edit"
-  put "/creatures/:id", to: "creatures#update"
+  get "/creatures/:id", to: "creatures#show", as: "creature"
+  get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
   patch "/creatures/:id", to: "creatures#update"
   delete "/creatures/:id", to: "creatures#destroy"
 end
