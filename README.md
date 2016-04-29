@@ -10,10 +10,10 @@ Researchers are collecting data on a local bog and need an app to quickly record
 
 We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
 
-  1. Start by making a `first-run` branch: `git checkout -b first-run` Go through this entire readme. Use as many hints as you'd like to check your work and make sure you get through the lab smoothly. Commit your work along the way and at the conclusion.
+  1. Start by making a `first-run` branch: `git checkout -b first-run`. Move through the instructions below to build your bog app. Use as many hints as you'd like to check your work and make sure you get through the lab smoothly. Commit your work along the way and at the conclusion.
   2. Reset your progress to the beginning by checking out master again `git checkout master` then make a `second-run` branch: `git checkout -b second-run`. Go through the lab another time. This time, time yourself on how long it takes you. Push yourself to peek at the hints more sparingly and code as much as you can on your own. Again, make sure to commit your work.
-  3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around.
-  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. This is the fourth time; streamline your process. Squash bugs faster and look at the resources less. Build it as fast as you can!
+  3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around. Make sure you have roughly the same number of commits as you had on your second run. Version control isn't the place to cut corners!
+  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. This is the fourth time; streamline your process. Squash bugs faster and look at the resources less. Commit often and build it as fast as you can!
 
 ## Background
 
@@ -325,33 +325,33 @@ The `POST /creatures` maps to the `creatures#create` controller action, so the n
 <details>
   <summary>The code:</summary>
   <p>
-    ```ruby
-    #
-    # app/controllers/creatures_controller.rb
-    #
 
-    class CreaturesController < ApplicationController
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-      ...
+  class CreaturesController < ApplicationController
 
-      # create a new creature in the database
-      def create
-        # whitelist params and save them to a variable
-        creature_params = params.require(:creature).permit(:name, :description)
+    # ...
 
-        # create a new creature from `creature_params`
-        creature = Creature.new(creature_params)
+    # create a new creature in the database
+    def create
+      # whitelist params and save them to a variable
+      creature_params = params.require(:creature).permit(:name, :description)
 
-        # if creature saves, redirect to route that displays all creatures
-        if creature.save
-          redirect_to creatures_path
-          # redirect_to creatures_path is equivalent to:
-          # redirect_to "/creatures"
-        end
+      # create a new creature from `creature_params`
+      creature = Creature.new(creature_params)
+
+      # if creature saves, redirect to route that displays all creatures
+      if creature.save
+        redirect_to creatures_path
+        # redirect_to creatures_path is equivalent to:
+        # redirect_to "/creatures"
       end
-
     end
-    ```
+  end
+  ```
   </p>
 </details>
 
