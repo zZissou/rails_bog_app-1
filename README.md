@@ -4,8 +4,16 @@
 | :--- |
 | Review **CRUD** in the context of a Rails application, especially **update** and **delete**. |
 | Implement **form helpers** in a  Rails application. |
+| Get some reps on building a Rails CRUD app. |
 
-Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](https://github.com/sf-wdi-25/rails_bog_app/tree/solution).
+Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](https://github.com/sf-wdi-27-28/rails_bog_app/tree/solution).
+
+We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
+
+  1. Start by making a `first-run` branch: `git checkout -b first-run` Go through this entire readme. Use as many hints as you'd like to check your work and make sure you get through the lab smoothly. Commit your work along the way and at the conclusion.
+  2. Reset your progress to the beginning by checking out master again `git checkout master` then make a `second-run` branch: `git checkout -b second-run`. Go through the lab another time. This time, time yourself on how long it takes you. Push yourself to peek at the hints more sparingly and code as much as you can on your own. Again, make sure to commit your work.
+  3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around.
+  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. This is the fourth time; streamline your process. Squash bugs faster and look at the resources less. Build it as fast as you can!
 
 ## Background
 
@@ -77,7 +85,7 @@ To include the Bootstrap file you just downloaded, require it in `app/assets/sty
 
 In Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
 <details>
-  <summary>Hint: It should now look exactly like this...</summary>
+  <summary>Throughout the instructions, there will be hints like this one that show you the code. When you're running through the project a second time, try to use these less. The third time, try not to use them at all. Hint: `routes.rb` should now look exactly like this...</summary>
   <p>
   ```ruby
   #
@@ -240,22 +248,27 @@ The Rails convention is to make a form for new creatures at the `/creatures/new`
 
 When a user sends a GET request to `/creatures/new`, your server will search for a `creatures#new` action, so you need to create a controller method to handle this request. `creatures#new` should render the view `new.html.erb` inside the `app/views/creatures` folder.
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-class CreaturesController < ApplicationController
+  class CreaturesController < ApplicationController
 
-  ...
+    ...
 
-  # show the new creature form
-  def new
-    render :new
+    # show the new creature form
+    def new
+      render :new
+    end
+
   end
-
-end
-```
+  ```
+  </p>
+</details>
 
 #### 3. Set up the view for the new creature form
 
@@ -284,86 +297,108 @@ Go to `localhost:3000/creatures/new` in the browser, and inspect the HTML for th
 
 Your new creature form has `action="/creatures"` and `method="POST"`. The `POST /creatures` route doesn't exist yet, so go ahead and create it!
 
-```ruby
-#
-#/config/routes.rb
-#
+<details>
+  <summary> Hint:</summary>
+  <p>
 
-Rails.application.routes.draw do
-  root to: "creatures#index"
+  ```ruby
+  #
+  #/config/routes.rb
+  #
 
-  get "/creatures", to: "creatures#index", as: "creatures"
-  get "/creatures/new", to: "creatures#new", as: "new_creature"
-  post "/creatures", to: "creatures#create"
+  Rails.application.routes.draw do
+    root to: "creatures#index"
 
-end
-```
+    get "/creatures", to: "creatures#index", as: "creatures"
+    get "/creatures/new", to: "creatures#new", as: "new_creature"
+    post "/creatures", to: "creatures#create"
+
+  end
+  ```
+  </p>
+</details>
 
 #### 5. Set up the creatures `create` action
 
 The `POST /creatures` maps to the `creatures#create` controller action, so the next step is to define the controller method to handle this request. `creatures#create` should add a new creature to the database.
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>The code:</summary>
+  <p>
+    ```ruby
+    #
+    # app/controllers/creatures_controller.rb
+    #
 
-class CreaturesController < ApplicationController
+    class CreaturesController < ApplicationController
 
-  ...
+      ...
 
-  # create a new creature in the database
-  def create
-    # whitelist params and save them to a variable
-    creature_params = params.require(:creature).permit(:name, :description)
+      # create a new creature in the database
+      def create
+        # whitelist params and save them to a variable
+        creature_params = params.require(:creature).permit(:name, :description)
 
-    # create a new creature from `creature_params`
-    creature = Creature.new(creature_params)
+        # create a new creature from `creature_params`
+        creature = Creature.new(creature_params)
 
-    # if creature saves, redirect to route that displays all creatures
-    if creature.save
-      redirect_to creatures_path
-      # redirect_to creatures_path is equivalent to:
-      # redirect_to "/creatures"
+        # if creature saves, redirect to route that displays all creatures
+        if creature.save
+          redirect_to creatures_path
+          # redirect_to creatures_path is equivalent to:
+          # redirect_to "/creatures"
+        end
+      end
+
     end
-  end
-
-end
-```
+    ```
+  </p>
+</details>
 
 #### 6. Refactor the `new` creature form
 
-Update your `creatures#new` action to send a new instance of a `Creature` to the new creature form:
+Update your `creatures#new` action to send a new instance of a `Creature` to the new creature form.
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
 
-class CreaturesController < ApplicationController
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-  ...
+  class CreaturesController < ApplicationController
 
-  # show the new creature form
-  def new
-    @creature = Creature.new
-    render :new
+    ...
+
+    # show the new creature form
+    def new
+      @creature = Creature.new
+      render :new
+    end
+
   end
-
-end
-```
+  ```
+  </p>
+</details>
 
 This sets `@creature` to a new instance of a `Creature`, which is automatically shared with the form in `views/creatures/new.html.erb`. This allows you to refactor the code for the `form_for` helper.
 
-```html
-<!-- app/views/creatures/new.html.erb -->
+<details>
+  <summary>It might look something like this:</summary>
+  <p>
+  ```html
+  <!-- app/views/creatures/new.html.erb -->
 
-<%= form_for @creature do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.submit "Save Creature" %>
-<% end %>
-```
+  <%= form_for @creature do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_area :description %>
+    <%= f.submit "Save Creature" %>
+  <% end %>
+  ```
+  </p>
+</details>
 
 Go to `localhost:3000/creatures/new` again in the browser, and inspect the HTML for the form on the page. Did anything change?
 
@@ -371,91 +406,112 @@ Go to `localhost:3000/creatures/new` again in the browser, and inspect the HTML 
 
 Right now, your app redirects to `/creatures` after creating a new creature, and the new creature shows up at the bottom of the page. Let's make a route for users to see a specific creature. Then, you'll be able to show a new creature by itself right after it's created.
 
-First, define a `show` route:
+First, define a `show` route.
 
-```ruby
-#
-# config/routes.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # config/routes.rb
+  #
 
-Rails.application.routes.draw do
-  root to: "creatures#index"
+  Rails.application.routes.draw do
+    root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index", as: "creatures"
-  get "/creatures/new", to: "creatures#new", as: "new_creature"
-  post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show", as: "creature"
-end
-```
-
-Now that you have your `show` route, set up the controller action for `creatures#show`:
-
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
-
-class CreaturesController < ApplicationController
-
-  ...
-
-  # display a specific creature
-  def show
-    # get the creature id from the url params
-    creature_id = params[:id]
-
-    # use `creature_id` to find the creature in the database
-    # and save it to an instance variable
-    @creature = Creature.find_by_id(creature_id)
-
-    # render the show view (it has access to instance variable)
-    render :show
+    get "/creatures", to: "creatures#index", as: "creatures"
+    get "/creatures/new", to: "creatures#new", as: "new_creature"
+    post "/creatures", to: "creatures#create"
+    get "/creatures/:id", to: "creatures#show", as: "creature"
   end
+  ```
+  </p>
+</details>
 
-end
-```
+Now that you have your `show` route, set up the controller action for `creatures#show`.
+
+<details>
+  <summary>Hint:</summary>
+  <p>
+
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
+
+  class CreaturesController < ApplicationController
+
+    ...
+
+    # display a specific creature
+    def show
+      # get the creature id from the url params
+      creature_id = params[:id]
+
+      # use `creature_id` to find the creature in the database
+      # and save it to an instance variable
+      @creature = Creature.find_by_id(creature_id)
+
+      # render the show view (it has access to instance variable)
+      render :show
+    end
+
+  end
+  ```
+  </p>
+</details>
 
 Next, create the view to display a single creature:
 
-```html
-<!-- app/views/creatures/show.html.erb -->
+<details>
+  <summary>It might look like this:</summary>
+  <p>
+  ```html
+  <!-- app/views/creatures/show.html.erb -->
 
-<h3><%= @creature.name %></h3>
-<p><%=  @creature.description %></p>
-```
+  <h3><%= @creature.name %></h3>
+  <p><%=  @creature.description %></p>
+  ```
+  </p>
+</details>
 
 #### 8. Refactor the `creatures#create` redirect
 
 The `creatures#create` method currently redirects to `/creatures`. Again, this isn't very helpful for users who want to verify that they successfully created a *single* creature. The best way to fix this is to have it redirect to `/creatures/:id` instead.
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-class CreaturesController < ApplicationController
+  class CreaturesController < ApplicationController
 
-  ...
+    ...
 
-  # create a new creature in the database
-  def create
-    # whitelist params and save them to a variable
-    creature_params = params.require(:creature).permit(:name, :description)
+    # create a new creature in the database
+    def create
+      # whitelist params and save them to a variable
+      creature_params = params.require(:creature).permit(:name, :description)
 
-    # create a new creature from `creature_params`
-    creature = Creature.new(creature_params)
+      # create a new creature from `creature_params`
+      creature = Creature.new(creature_params)
 
-    # if creature saves, redirect to route that displays
-    # ONLY the newly created creature
-    if creature.save
-      redirect_to creature_path(creature)
-      # redirect_to creature_path(creature) is equivalent to:
-      # redirect_to "/creatures/#{creature.id}"
+      # if creature saves, redirect to route that displays
+      # ONLY the newly created creature
+      if creature.save
+        redirect_to creature_path(creature)
+        # redirect_to creature_path(creature) is equivalent to:
+        # redirect_to "/creatures/#{creature.id}"
+      end
     end
-  end
 
-end
-```
+  end
+  ```
+  </p>
+</details>
 
 Make sure to `git add` and `git commit` again once you have `new`, `create`, and `show` working.
 
@@ -468,64 +524,79 @@ Editing a specific creature requires two methods:
 
 #### 1. Define a route for the `edit` creature form
 
-```ruby
-#
-# config/routes.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # config/routes.rb
+  #
 
-Rails.application.routes.draw do
-  root to: "creatures#index"
+  Rails.application.routes.draw do
+    root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index", as: "creatures"
-  get "/creatures/new", to: "creatures#new", as: "new_creature"
-  post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show", as: "creature"
-  get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
-end
-```
+    get "/creatures", to: "creatures#index", as: "creatures"
+    get "/creatures/new", to: "creatures#new", as: "new_creature"
+    post "/creatures", to: "creatures#create"
+    get "/creatures/:id", to: "creatures#show", as: "creature"
+    get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
+  end
+  ```
+  </p>
+</details>
 
 #### 2. Set up the creatures `edit` action
 
 Using your `creatures#new` and `creatures#show` method as inspiration, you can write the `creatures#edit` method in the creatures controller:
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-class CreaturesController < ApplicationController
+  class CreaturesController < ApplicationController
 
-  ...
+    ...
 
-  # show the edit creature form
-  def edit
-    # get the creature id from the url params
-    creature_id = params[:id]
+    # show the edit creature form
+    def edit
+      # get the creature id from the url params
+      creature_id = params[:id]
 
-    # use `creature_id` to find the creature in the database
-    # and save it to an instance variable
-    @creature = Creature.find_by_id(creature_id)
+      # use `creature_id` to find the creature in the database
+      # and save it to an instance variable
+      @creature = Creature.find_by_id(creature_id)
 
-    # render the edit view (it has access to instance variable)
-    render :edit
+      # render the edit view (it has access to instance variable)
+      render :edit
+    end
+
   end
-
-end
-```
+  ```
+  </p>
+</details>
 
 #### 3. Set up the view for the edit creature form
 
 Create an `edit.html.erb` view inside `views/creatures`. Jump-start the edit form by copying the form from `views/creatures/new.html.erb` into `views/creatures/edit.html.erb`:
 
-```html
-<!-- app/views/creatures/edit.html.erb -->
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```html
+  <!-- app/views/creatures/edit.html.erb -->
 
-<%= form_for @creature do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.submit "Save Creature" %>
-<% end %>
-```
+  <%= form_for @creature do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_area :description %>
+    <%= f.submit "Save Creature" %>
+  <% end %>
+  ```
+  </p>
+</details>
 
 Go to `localhost:3000/creatures/1/edit` in the browser to see what it looks like so far.  Check the `method` and `action` of the form. Also look at the hidden input with `name="_method"`.  What is it doing? The Rails form helper knows to turn this same code into an edit form because you're on the edit page!
 
@@ -533,22 +604,27 @@ Go to `localhost:3000/creatures/1/edit` in the browser to see what it looks like
 
 The update route will use the `id` of the creature to be updated. In Express, you decided between `PUT /creatures/:id` and `PATCH /creatures/:id`, depending on the type of update you wanted to do. In Rails, we'll need to add `PATCH /creatures/:id` only to our routes.
 
-```ruby
-#
-# config/routes.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # config/routes.rb
+  #
 
-Rails.application.routes.draw do
-  root to: "creatures#index"
+  Rails.application.routes.draw do
+    root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index", as: "creatures"
-  get "/creatures/new", to: "creatures#new", as: "new_creature"
-  post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show", as: "creature"
-  get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
-  patch "/creatures/:id", to: "creatures#update"
-end
-```
+    get "/creatures", to: "creatures#index", as: "creatures"
+    get "/creatures/new", to: "creatures#new", as: "new_creature"
+    post "/creatures", to: "creatures#create"
+    get "/creatures/:id", to: "creatures#show", as: "creature"
+    get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
+    patch "/creatures/:id", to: "creatures#update"
+  end
+  ```
+  </p>
+</details>
 
 Run `rake routes` in the Terminal to see the newly created update routes.
 
@@ -556,38 +632,44 @@ Run `rake routes` in the Terminal to see the newly created update routes.
 
 In the `CreaturesController`, define an `update` method:
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
 
-class CreaturesController < ApplicationController
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-  ...
+  class CreaturesController < ApplicationController
 
-  # update a creature in the database
-  def update
-    # get the creature id from the url params
-    creature_id = params[:id]
+    ...
 
-    # use `creature_id` to find the creature in the database
-    # and save it to an instance variable
-    creature = Creature.find_by_id(creature_id)
+    # update a creature in the database
+    def update
+      # get the creature id from the url params
+      creature_id = params[:id]
 
-    # whitelist params and save them to a variable
-    creature_params = params.require(:creature).permit(:name, :description)
+      # use `creature_id` to find the creature in the database
+      # and save it to an instance variable
+      creature = Creature.find_by_id(creature_id)
 
-    # update the creature
-    creature.update_attributes(creature_params)
+      # whitelist params and save them to a variable
+      creature_params = params.require(:creature).permit(:name, :description)
 
-    # redirect to show page for the updated creature
-    redirect_to creature_path(creature)
-    # redirect_to creature_path(creature) is equivalent to:
-    # redirect_to "/creatures/#{creature.id}"
+      # update the creature
+      creature.update_attributes(creature_params)
+
+      # redirect to show page for the updated creature
+      redirect_to creature_path(creature)
+      # redirect_to creature_path(creature) is equivalent to:
+      # redirect_to "/creatures/#{creature.id}"
+    end
+
   end
-
-end
-```
+  ```
+  </p>
+</details>
 
 Test your `creatures#update` method in the browser by editing the creature with an `id` of 1 (go to `localhost:3000/creatures/1/edit`). Then, `git add` and `git commit` your work.
 
@@ -597,23 +679,29 @@ Test your `creatures#update` method in the browser by editing the creature with 
 
 Following a similar pattern to our other routes, create a route to `destroy` (delete) a specific creature based on its `id`.
 
-```ruby
-#
-# config/routes.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
 
-Rails.application.routes.draw do
-  root to: "creatures#index"
+  ```ruby
+  #
+  # config/routes.rb
+  #
 
-  get "/creatures", to: "creatures#index", as: "creatures"
-  get "/creatures/new", to: "creatures#new", as: "new_creature"
-  post "/creatures", to: "creatures#create"
-  get "/creatures/:id", to: "creatures#show", as: "creature"
-  get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
-  patch "/creatures/:id", to: "creatures#update"
-  delete "/creatures/:id", to: "creatures#destroy"
-end
-```
+  Rails.application.routes.draw do
+    root to: "creatures#index"
+
+    get "/creatures", to: "creatures#index", as: "creatures"
+    get "/creatures/new", to: "creatures#new", as: "new_creature"
+    post "/creatures", to: "creatures#create"
+    get "/creatures/:id", to: "creatures#show", as: "creature"
+    get "/creatures/:id/edit", to: "creatures#edit", as: "edit_creature"
+    patch "/creatures/:id", to: "creatures#update"
+    delete "/creatures/:id", to: "creatures#destroy"
+  end
+  ```
+  </p>
+</details>
 
 At this point, you're using all the RESTful routes for creatures.
 
@@ -622,39 +710,47 @@ At this point, you're using all the RESTful routes for creatures.
 
 In the `CreaturesController`, define an `destroy` method:
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
 
-class CreaturesController < ApplicationController
+  class CreaturesController < ApplicationController
 
-  ...
+    ...
 
-  # delete a creature from the database
-  def destroy
-    # get the creature id from the url params
-    creature_id = params[:id]
+    # delete a creature from the database
+    def destroy
+      # get the creature id from the url params
+      creature_id = params[:id]
 
-    # use `creature_id` to find the creature in the database
-    # and save it to an instance variable
-    creature = Creature.find_by_id(creature_id)
+      # use `creature_id` to find the creature in the database
+      # and save it to an instance variable
+      creature = Creature.find_by_id(creature_id)
 
-    # destroy the creature
-    creature.destroy
+      # destroy the creature
+      creature.destroy
 
-    # redirect to creatures index
-    redirect_to creatures_path
-    # redirect_to creatures_path is equivalent to:
-    # redirect_to "/creatures"
+      # redirect to creatures index
+      redirect_to creatures_path
+      # redirect_to creatures_path is equivalent to:
+      # redirect_to "/creatures"
+    end
+
   end
-
-end
-```
+  ```
+  </p>
+</details>
 
 #### 3. Add a delete button
 
 Add a delete button to the view that displays a single creature:
+<details>
+  <summary>It could look something like:</summary>
+  <p>
 
 ```html
 <!-- app/views/creatures/show.html.erb -->
@@ -663,6 +759,8 @@ Add a delete button to the view that displays a single creature:
 <p><%=  @creature.description %></p>
 <%= button_to "Delete", @creature, method: :delete %>
 ```
+  </p>
+</details>
 
 Visit `localhost:3000/creatures/1` in the browser, and inspect the HTML for the delete button. Click the delete button to manually test this feature.
 
@@ -671,8 +769,8 @@ At this point, you've created all the RESTful routes, implemented controller act
 ## Bonus
 
 * Add a Bootstrap `navbar` with links to the homepage (`/`) and the new creatures page (`/creatures/new`). Also link each creature on `creatures#index` to its individual `show` page.
-* Read about <a href="http://guides.rubyonrails.org/active_record_validations.html" target="_blank">Active Record Validations</a>, and add validations to the `Creature` model to make sure a new creature can't be created without a `name` and `description`.
-* Read the docs for the <a href="https://github.com/thoughtbot/paperclip" target="_blank">Paperclip gem</a>, and incorporate it into your Bog App to upload photos of creatures.
+* Read about [Active Record Validations](http://guides.rubyonrails.org/active_record_validations.html), and add validations to the `Creature` model to make sure a new creature can't be created without a `name` and `description`.
+* Read the docs for the [Paperclip gem](https://github.com/thoughtbot/paperclip), and incorporate it into your Bog App to upload photos of creatures.
 
 ## Submission
 
