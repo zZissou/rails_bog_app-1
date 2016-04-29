@@ -5,7 +5,7 @@
 | Review **CRUD** in the context of a Rails application, especially **update** and **delete**. |
 | Implement **form helpers** in a  Rails application. |
 
-Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the <a href="https://github.com/sf-wdi-25/rails_bog_app/tree/solution" target="_blank">solution branch</a>.
+Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](https://github.com/sf-wdi-25/rails_bog_app/tree/solution).
 
 ## Background
 
@@ -37,13 +37,10 @@ REST stands for **REpresentational State Transfer**. We will strictly adhere to 
 
 #### 1. Set up a new Rails project
 
-Fork this repo, and clone it into your `develop` folder on your local machine. Change directories into `rails_bog_app`, and create a new Rails project:
+Fork this repo, and clone it into your `wdi` folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
 
 ```zsh
-➜  rails new bog_app -T
-➜  mv bog_app/* ./
-➜  rm -rf bog_app
-➜  rm README.rdoc
+➜  rails new bog_app -T postgresql
 ➜  rake db:create
 ➜  rails s
 ```
@@ -78,32 +75,43 @@ To include the Bootstrap file you just downloaded, require it in `app/assets/sty
 
 #### 3. Define the `root` and creatures `index` routes
 
-In Sublime, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text. It should now look exactly like this:
+In Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
+<details>
+  <summary>Hint: It should now look exactly like this...</summary>
+  <p>
+  ```ruby
+  #
+  # config/routes.rb
+  #
+  Rails.application.routes.draw do
 
-```ruby
-#
-# config/routes.rb
-#
+  end
+  ```
+  </p>
+</details>
+<br>
 
-Rails.application.routes.draw do
+Your routes tell your app how to direct **HTTP requests** to **controller actions**. Define your `root` route and your creatures `index` route to refer to the index method in the creatures controller:
 
-end
-```
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # config/routes.rb
+  #
 
-Your routes tell your app how to direct **HTTP requests** to **controller actions**. Define your `root` and creatures `index` routes as follows:
+  Rails.application.routes.draw do
+    root "creatures#index"
 
-```ruby
-#
-# config/routes.rb
-#
+    get "/creatures", to: "creatures#index", as: "creatures"
 
-Rails.application.routes.draw do
-  root "creatures#index"
+  end
+  ```
+  </p>
+</details>
 
-  get "/creatures", to: "creatures#index", as: "creatures"
 
-end
-```
 
 In the Terminal, running `rake routes` will list all your routes. You'll see that some routes have a "prefix" listed. These routes have associated route helpers, which are methods Rails creates to generate URLs. The format of a route helper is `prefix_path`. For example, `creatures_path` is the full route helper for `GET /creatures` (the creatures index). We often use route helpers to generate URLs in forms, links, and controllers.
 
@@ -115,26 +123,28 @@ Run the following command in the Terminal to generate a controller for creatures
 ➜  rails g controller creatures
 ```
 
-Next, define the `creatures#index` action in the creatures controller:
+Next, define the `creatures#index` action in the creatures controller. The variable `@creatures` should be all of the creatures in the db:
 
-```ruby
-#
-# app/controllers/creatures_controller.rb
-#
-
-class CreaturesController < ApplicationController
-
-  # display all creatures
-  def index
-    # get all creatures from db and save to instance variable
-    @creatures = Creature.all
-
-    # render the index view (it has access to instance variable)
-    render :index
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
+  class CreaturesController < ApplicationController
+    # display all creatures
+    def index
+      # get all creatures from db and save to instance variable
+      @creatures = Creature.all
+      # render the index view (it has access to instance variable)
+      render :index
+    end
   end
+  ```
+  </p>
+</details>
 
-end
-```
 
 #### 5. Set up the creature model
 
@@ -163,7 +173,7 @@ irb(main):001:0> Creature.create({name: "Yoda", description: "Little green man"}
 
 When you create an application in development, you typically want some mock data to play with. In Rails, you can just drop this into the `db/seeds.rb` file.
 
-Back in Sublime, add some seed data to `db/seeds.rb`:
+Back in Atom, add some seed data to `db/seeds.rb`:
 
 ```ruby
 #
@@ -182,16 +192,22 @@ If you look inside the `app/views` directory, the `/creatures` folder has alread
 
 Inside your creatures index view, iterate through all the creatures in the database, and display them on the page:
 
-```html
-<!-- app/views/creatures/index.html.erb -->
-
-<% @creatures.each do |creature| %>
+<details>
+  <summary>Here's one way that could look:</summary>
   <p>
-    <strong>Name:</strong> <%= creature.name %><br>
-    <strong>Description:</strong> <%= creature.description %>
+  ```html
+  <!-- app/views/creatures/index.html.erb -->
+
+  <% @creatures.each do |creature| %>
+    <p>
+      <strong>Name:</strong> <%= creature.name %><br>
+      <strong>Description:</strong> <%= creature.description %>
+    </p>
+  <% end %>
+  ```
   </p>
-<% end %>
-```
+</details>
+<br>
 
 Go to `localhost:3000` in the browser. What do you see on the page? If you haven't already, `git add` and `git commit` the work you've done so far.
 
@@ -201,18 +217,24 @@ Go to `localhost:3000` in the browser. What do you see on the page? If you haven
 
 The Rails convention is to make a form for new creatures at the `/creatures/new` path in our browser.
 
-```ruby
-#
-#/config/routes.rb
-#
+<details>
+  <summary>Hint:</summary>
+  <p>
+  ```ruby
+  #
+  #/config/routes.rb
+  #
 
-Rails.application.routes.draw do
-  root to: "creatures#index"
+  Rails.application.routes.draw do
+    root to: "creatures#index"
 
-  get "/creatures", to: "creatures#index"
-  get "/creatures/new", to: "creatures#new"
-end
-```
+    get "/creatures", to: "creatures#index"
+    get "/creatures/new", to: "creatures#new"
+  end
+  ```
+  </p>
+</details>
+<br>
 
 #### 2. Set up the creatures `new` action
 
@@ -239,15 +261,20 @@ end
 
 Create the view `new.html.erb` inside the `app/views/creatures` folder. On this view, users should see a form to create new creatures in the database.
 
-```html
-<!-- app/views/creatures/new.html.erb -->
+<details>
+  <summary>Here's one way that could look:</summary>
+  <p>
+  ```html
+  <!-- app/views/creatures/new.html.erb -->
 
-<%= form_for :creature, url: "/creatures", method: "post" do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_area :description %>
-  <%= f.submit "Save Creature" %>
-<% end %>
-```
+  <%= form_for :creature, url: "/creatures", method: "post" do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_area :description %>
+    <%= f.submit "Save Creature" %>
+  <% end %>
+  ```
+  </p>
+</details>
 
 **Note:** The URL you're submitting the form to is `/creatures` because it's the database collection for creatures, and the method is `post` because you're *creating* a new creature.
 
