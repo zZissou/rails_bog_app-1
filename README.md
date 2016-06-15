@@ -83,7 +83,7 @@ To include the Bootstrap file you just downloaded, require it in `app/assets/sty
 
 #### 3. Define the `root` and creatures `index` routes
 
-In Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
+In Sublime or Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
 <details>
   <summary>Throughout the instructions, there will be hints like this one that show you the code. When you're running through the project a second time, try to use these less. The third time, try not to use them at all. Hint: `routes.rb` should now look exactly like this...</summary>
   <p>
