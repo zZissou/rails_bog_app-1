@@ -282,8 +282,8 @@ Create the view `new.html.erb` inside the `app/views/creatures` folder. On this 
   <!-- app/views/creatures/new.html.erb -->
 
   <%= form_for :creature, url: "/creatures", method: "post" do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_area :description %>
+    Name: <%= f.text_field :name %>
+    Description: <%= f.text_area :description %>
     <%= f.submit "Save Creature" %>
   <% end %>
   ```
@@ -393,8 +393,8 @@ This sets `@creature` to a new instance of a `Creature`, which is automatically 
   <!-- app/views/creatures/new.html.erb -->
 
   <%= form_for @creature do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_area :description %>
+    <p>Name:</p><%= f.text_field :name %>
+    <p>Description:</p><%= f.text_area :description %><br>
     <%= f.submit "Save Creature" %>
   <% end %>
   ```
@@ -591,8 +591,8 @@ Create an `edit.html.erb` view inside `views/creatures`. Jump-start the edit for
   <!-- app/views/creatures/edit.html.erb -->
 
   <%= form_for @creature do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_area :description %>
+    <p>Name:</p><%= f.text_field :name %>
+    <p>Description:</p><%= f.text_area :description %><br>
     <%= f.submit "Save Creature" %>
   <% end %>
   ```
