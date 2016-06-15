@@ -45,10 +45,11 @@ REST stands for **REpresentational State Transfer**. We will strictly adhere to 
 
 #### 1. Set up a new Rails project
 
-Fork this repo, and clone it into your `wdi` folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
+Fork this repo, and clone it into your dev folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
 
 ```zsh
 ➜  rails new bog_app -T -d postgresql
+➜  cd bog_app
 ➜  rake db:create
 ➜  rails s
 ```
