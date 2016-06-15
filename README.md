@@ -160,7 +160,7 @@ Next, define the `creatures#index` action in the creatures controller. The varia
 Run the following command in the Terminal to generate the `Creature` model:
 
 ```zsh
-➜  rails g model creature name description
+➜  rails g model creature name:string description:text
 ```
 
 Run the migration to update the database with this change:
@@ -175,7 +175,7 @@ In the Terminal, enter the Rails console. The Rails console is built on top of `
 
 ```zsh
 ➜  rails c
-irb(main):001:0> Creature.create({name: "Yoda", description: "Little green man"})
+irb(main):001:0> Creature.create({name: "Yoda", description: "900-year-old Jedi master. Lives in a swamp on Degoba. Steals food and giggles."})
 ```
 
 #### 7. Seed your database
@@ -189,8 +189,8 @@ Back in Atom, add some seed data to `db/seeds.rb`:
 # db/seeds.rb
 #
 
-Creature.create({name: "Luke", description: "Jedi"})
-Creature.create({name: "Darth Vader", description: "Father of Luke"})
+Creature.create({name: "Gollum", description: "originally known as Sméagol, was at first a Stoor, one of the three early Hobbit-types. Deformed and twisted in body and mind by the corruption of the Ring, his chief desire was to possess the very Ring that had enslaved him."})
+Creature.create({name: "Swamp Thing", description: "A humanoid mass of vegetable matter who fights to protect his swamp home, the environment in general, and humanity from various supernatural or terrorist threats."})
 ```
 
 In the Terminal (not inside rails console!), run `rake db:seed`. Note that the seeds file will also run every time you run `rake db:reset` to reset your database.
