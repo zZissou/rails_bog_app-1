@@ -6,7 +6,7 @@
 | Implement **form helpers** in a  Rails application. |
 | Get some reps on building a Rails CRUD app. |
 
-Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](https://github.com/sf-wdi-27-28/rails_bog_app/tree/solution).
+Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
 
 We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
 
