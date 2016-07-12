@@ -6,7 +6,7 @@
 | Implement **form helpers** in a  Rails application. |
 | Get some reps on building a Rails CRUD app. |
 
-Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](https://github.com/sf-wdi-27-28/rails_bog_app/tree/solution).
+Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
 
 We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
 
@@ -45,10 +45,11 @@ REST stands for **REpresentational State Transfer**. We will strictly adhere to 
 
 #### 1. Set up a new Rails project
 
-Fork this repo, and clone it into your `wdi` folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
+Fork this repo, and clone it into your dev folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
 
 ```zsh
 ➜  rails new bog_app -T -d postgresql
+➜  cd bog_app
 ➜  rake db:create
 ➜  rails s
 ```
@@ -83,7 +84,7 @@ To include the Bootstrap file you just downloaded, require it in `app/assets/sty
 
 #### 3. Define the `root` and creatures `index` routes
 
-In Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
+In Sublime or Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
 <details>
   <summary>Throughout the instructions, there will be hints like this one that show you the code. When you're running through the project a second time, try to use these less. The third time, try not to use them at all. Hint: `routes.rb` should now look exactly like this...</summary>
   <p>
@@ -159,7 +160,7 @@ Next, define the `creatures#index` action in the creatures controller. The varia
 Run the following command in the Terminal to generate the `Creature` model:
 
 ```zsh
-➜  rails g model creature name description
+➜  rails g model creature name:string description:text
 ```
 
 Run the migration to update the database with this change:
@@ -174,7 +175,7 @@ In the Terminal, enter the Rails console. The Rails console is built on top of `
 
 ```zsh
 ➜  rails c
-irb(main):001:0> Creature.create({name: "Yoda", description: "Little green man"})
+irb(main):001:0> Creature.create({name: "Yoda", description: "900-year-old Jedi master. Lives in a swamp on Degoba. Steals food and giggles."})
 ```
 
 #### 7. Seed your database
@@ -188,8 +189,8 @@ Back in Atom, add some seed data to `db/seeds.rb`:
 # db/seeds.rb
 #
 
-Creature.create({name: "Luke", description: "Jedi"})
-Creature.create({name: "Darth Vader", description: "Father of Luke"})
+Creature.create({name: "Gollum", description: "originally known as Sméagol, was at first a Stoor, one of the three early Hobbit-types. Deformed and twisted in body and mind by the corruption of the Ring, his chief desire was to possess the very Ring that had enslaved him."})
+Creature.create({name: "Swamp Thing", description: "A humanoid mass of vegetable matter who fights to protect his swamp home, the environment in general, and humanity from various supernatural or terrorist threats."})
 ```
 
 In the Terminal (not inside rails console!), run `rake db:seed`. Note that the seeds file will also run every time you run `rake db:reset` to reset your database.
@@ -281,8 +282,8 @@ Create the view `new.html.erb` inside the `app/views/creatures` folder. On this 
   <!-- app/views/creatures/new.html.erb -->
 
   <%= form_for :creature, url: "/creatures", method: "post" do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_area :description %>
+    Name: <%= f.text_field :name %>
+    Description: <%= f.text_area :description %>
     <%= f.submit "Save Creature" %>
   <% end %>
   ```
@@ -392,8 +393,8 @@ This sets `@creature` to a new instance of a `Creature`, which is automatically 
   <!-- app/views/creatures/new.html.erb -->
 
   <%= form_for @creature do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_area :description %>
+    <p>Name:</p><%= f.text_field :name %>
+    <p>Description:</p><%= f.text_area :description %><br>
     <%= f.submit "Save Creature" %>
   <% end %>
   ```
@@ -590,8 +591,8 @@ Create an `edit.html.erb` view inside `views/creatures`. Jump-start the edit for
   <!-- app/views/creatures/edit.html.erb -->
 
   <%= form_for @creature do |f| %>
-    <%= f.text_field :name %>
-    <%= f.text_area :description %>
+    <p>Name:</p><%= f.text_field :name %>
+    <p>Description:</p><%= f.text_area :description %><br>
     <%= f.submit "Save Creature" %>
   <% end %>
   ```
