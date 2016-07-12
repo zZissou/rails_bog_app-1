@@ -779,3 +779,8 @@ Once you've finished the assignment and pushed your work to GitHub, make a pull 
 ## CONGRATULATIONS! You have created a Bog App! Take a break, you look *Swamped*!
 
 ![](https://cloud.githubusercontent.com/assets/7833470/11501240/83536030-97e7-11e5-8060-fa7666de7165.jpeg)
+
+
+## Licensing
+All content is licensed under a CC­BY­NC­SA 4.0 license.
+All software code is licensed under GNU GPLv3. For commercial use or alternative licensing, please contact legal@ga.co.
