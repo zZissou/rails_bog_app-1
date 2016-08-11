@@ -43,6 +43,8 @@ REST stands for **REpresentational State Transfer**. We will strictly adhere to 
 
 ## Part I: Display all creatures with `index`
 
+![](https://camo.githubusercontent.com/58b675eee577ccb1f4b57b14e58761b3fa56a3b8/687474703a2f2f692e67697068792e636f6d2f313149334f7346524c6b514951552e676966)
+
 #### 1. Set up a new Rails project
 
 Fork this repo, and clone it into your `wdi` folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
@@ -220,6 +222,8 @@ Inside your creatures index view, iterate through all the creatures in the datab
 Go to `localhost:3000` in the browser. What do you see on the page? If you haven't already, `git add` and `git commit` the work you've done so far.
 
 ## Part II: Make a creature with `new` (form) and `create` (database)
+![](https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966)
+
 
 #### 1. Define a route for the `new` creature form
 
@@ -517,6 +521,10 @@ Make sure to `git add` and `git commit` again once you have `new`, `create`, and
 
 ## Part III: Change a creature with `edit` (form) and `update` (database)
 
+![](https://camo.githubusercontent.com/9f3f575f52088b41954636a670b1d44b3eac9fb9/687474703a2f2f692e67697068792e636f6d2f31324b7856766a35415232556e652e676966)  
+
+**Don't Give Up!!!**
+
 Editing a specific creature requires two methods:
 
 * `edit` displays a form with the existing creature info to be edited by the user
@@ -674,6 +682,8 @@ In the `CreaturesController`, define an `update` method:
 Test your `creatures#update` method in the browser by editing the creature with an `id` of 1 (go to `localhost:3000/creatures/1/edit`). Then, `git add` and `git commit` your work.
 
 ## Part IV: Delete a creature with `destroy` (database)
+
+![](https://camo.githubusercontent.com/f0e4aa6a005ce35a3777c33d2445b3396be690f0/687474703a2f2f692e67697068792e636f6d2f6e53556e4f4c4a46324e6776362e676966)
 
 #### 1. Define a route to `destroy` a specific creature
 
