@@ -1,14 +1,18 @@
 # <img src="https://cloud.githubusercontent.com/assets/7833470/10899314/63829980-8188-11e5-8cdd-4ded5bcb6e36.png" height="60"> Rails Bog App
 
+### Overview
 
 Everyone does blog apps. Now, you're going to work on a **bog app**. Researchers are collecting data on a local bog and need an app to quickly record field data. 
 
+### Objectives
 
 It's time to put all your Rails knowledge into practice. In this project, you will:
 - Review **CRUD** in the context of a Rails application, especially **update** and **delete**.
 - Implement **form helpers** in a  Rails application.
 - Build memory for the steps required to create a Rails app. 
 
+
+### Workflow
 If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
 
 We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
@@ -17,6 +21,17 @@ We want to format this project as a "time trial." You will be building the app 4
   2. Reset your progress to the beginning by checking out master again `git checkout master` then make a `second-run` branch: `git checkout -b second-run`. Go through the lab another time. This time, time yourself on how long it takes you. Push yourself to peek at the hints more sparingly and code as much as you can on your own. Again, make sure to commit your work.
   3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around. Make sure you have roughly the same number of commits as you had on your second run. Version control isn't the place to cut corners!
   4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. This is the fourth time; streamline your process. Squash bugs faster and look at the resources less. Commit often and build it as fast as you can!
+  
+When you're finished with your timed runs, edit the README on your master branch with an introduction paragraph that includes:
+
+ - a 3-5 sentences reflection on how this went for you  
+ - a tip for others to help conquer some part of the app that used to trip you up  
+ - the times for your first and last runs   
+ - the name of the branch you think is most complete  
+  
+![](https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966)
+
+
 
 ## Background
 
@@ -230,7 +245,9 @@ Inside your creatures index view, iterate through all the creatures in the datab
 Go to `localhost:3000` in the browser. What do you see on the page? If you haven't already, `git add` and `git commit` the work you've done so far.
 
 ## Part II: Make a creature with `new` (form) and `create` (database)
-![](https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966)
+
+
+<img src="https://media.giphy.com/media/jnVeAppOL9te0/giphy.gif">
 
 
 #### 1. Define a route for the `new` creature form
