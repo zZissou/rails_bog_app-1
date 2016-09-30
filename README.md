@@ -1,12 +1,15 @@
 # <img src="https://cloud.githubusercontent.com/assets/7833470/10899314/63829980-8188-11e5-8cdd-4ded5bcb6e36.png" height="60"> Rails Bog App
 
-| Objectives |
-| :--- |
-| Review **CRUD** in the context of a Rails application, especially **update** and **delete**. |
-| Implement **form helpers** in a  Rails application. |
-| Get some reps on building a Rails CRUD app. |
 
-Researchers are collecting data on a local bog and need an app to quickly record field data. Your goal is to create a **Bog App**. If you get stuck at any point, feel free to reference the [solution branch](https://github.com/sf-wdi-27-28/rails_bog_app/tree/solution).
+Everyone does blog apps. Now, you're going to work on a **bog app**. Researchers are collecting data on a local bog and need an app to quickly record field data. 
+
+
+It's time to put all your Rails knowledge into practice. In this project, you will:
+- Review **CRUD** in the context of a Rails application, especially **update** and **delete**.
+- Implement **form helpers** in a  Rails application.
+- Build memory for the steps required to create a Rails app. 
+
+If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
 
 We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
 
@@ -47,7 +50,7 @@ REST stands for **REpresentational State Transfer**. We will strictly adhere to 
 
 #### 1. Set up a new Rails project
 
-Fork this repo, and clone it into your `wdi` folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
+Fork this repo, and clone it into your wdi folder on your local machine. Change directories into `rails-bog-app`, and create a new Rails project:
 
 ```zsh
 ➜  rails new bog_app -T -d postgresql
@@ -61,7 +64,9 @@ Your app should be up and running at `localhost:3000`.
 
 Rails handles CSS and JavaScript with a system called the asset pipeline. We'll go over it more next week, but for now, you'll add Bootstrap via the asset pipeline.
 
-Third-party libraries belong in the `vendor/assets` sub-directory of your Rails app. Use the following Terminal command to download the Bootstrap CSS file (via `curl`) and save it in a new `bootstrap-3.3.6.min.css` file inside the `vendor/assets/stylesheets` sub-directory.
+Third-party libraries belong in the `vendor/assets` sub-directory of your Rails app. You'll need to download a Bootstrap CSS file and add it to this directory.  
+
+One way you can do that is to use the following Terminal command to download the Bootstrap CSS file (via `curl`) and save it in a new `bootstrap-3.3.6.min.css` file inside the `vendor/assets/stylesheets` sub-directory. You may want to find and use the most recent version of Bootstrap if it's no longer 3.3.6. 
 
 ```zsh
 ➜  curl https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css > vendor/assets/stylesheets/bootstrap-3.3.6.min.css
@@ -85,9 +90,12 @@ To include the Bootstrap file you just downloaded, require it in `app/assets/sty
 
 #### 3. Define the `root` and creatures `index` routes
 
-In Atom, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
+In your text editor, open up `config/routes.rb`. Inside the routes `draw` block, erase all the commented text.
+
+> _You're about to see a hint! Throughout the instructions, there will be hints like this one that show you parts of the code. When you're running through the project a second time, try to use these less. The third time, try not to use them at all._
+
 <details>
-  <summary>Throughout the instructions, there will be hints like this one that show you the code. When you're running through the project a second time, try to use these less. The third time, try not to use them at all. Hint: `routes.rb` should now look exactly like this...</summary>
+  <summary>Hint: `routes.rb` should now look exactly like this...</summary>
   <p>
   ```ruby
   #
@@ -123,7 +131,7 @@ Your routes tell your app how to direct **HTTP requests** to **controller action
 
 
 
-In the Terminal, running `rake routes` will list all your routes. You'll see that some routes have a "prefix" listed. These routes have associated route helpers, which are methods Rails creates to generate URLs. The format of a route helper is `prefix_path`. For example, `creatures_path` is the full route helper for `GET /creatures` (the creatures index). We often use route helpers to generate URLs in forms, links, and controllers.
+In the Terminal, running `rails routes` or `rake routes` will list all your routes. You'll see that some routes have a "prefix" listed. These routes have associated route helpers, which are methods Rails creates to generate URLs. The format of a route helper is `prefix_path`. For example, `creatures_path` is the full route helper for `GET /creatures` (the creatures index). We often use route helpers to generate URLs in forms, links, and controllers.
 
 #### 4. Set up the creatures controller and `index` action
 
@@ -137,13 +145,12 @@ Next, define the `creatures#index` action in the creatures controller. The varia
 
 <details>
   <summary>Hint:</summary>
-  <p>
   ```ruby
   #
   # app/controllers/creatures_controller.rb
   #
   class CreaturesController < ApplicationController
-    # display all creatures
+  # display all creatures
     def index
       # get all creatures from db and save to instance variable
       @creatures = Creature.all
@@ -152,8 +159,9 @@ Next, define the `creatures#index` action in the creatures controller. The varia
     end
   end
   ```
-  </p>
 </details>
+  
+
 
 
 #### 5. Set up the creature model
@@ -780,7 +788,7 @@ At this point, you've created all the RESTful routes, implemented controller act
 
 * Add a Bootstrap `navbar` with links to the homepage (`/`) and the new creatures page (`/creatures/new`). Also link each creature on `creatures#index` to its individual `show` page.
 * Read about [Active Record Validations](http://guides.rubyonrails.org/active_record_validations.html), and add validations to the `Creature` model to make sure a new creature can't be created without a `name` and `description`.
-* Read the docs for the [Paperclip gem](https://github.com/thoughtbot/paperclip), and incorporate it into your Bog App to upload photos of creatures.
+* Read the docs for the [Paperclip gem](https://github.com/thoughtbot/paperclip), and incorporate it into your Bog App to upload photos of creatures locally.
 
 ## Submission
 
