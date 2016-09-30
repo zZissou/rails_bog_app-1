@@ -22,6 +22,11 @@ We want to format this project as a "time trial." You will be building the app 4
   3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around. Make sure you have roughly the same number of commits as you had on your second run. Version control isn't the place to cut corners!
   4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. This is the fourth time; streamline your process. Squash bugs faster and look at the resources less. Commit often and build it as fast as you can!
   
+  
+<img src="https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966" width="40%">
+
+### Sharing
+
 When you're finished with your timed runs, edit the README on your master branch with an introduction paragraph that includes:
 
  - a 3-5 sentences reflection on how this went for you  
@@ -29,7 +34,7 @@ When you're finished with your timed runs, edit the README on your master branch
  - the times for your first and last runs   
  - the name of the branch you think is most complete  
   
-![](https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966)
+Add a link to your bog app repo on the "My Work" section of your personal website.
 
 
 
