@@ -529,7 +529,9 @@ Make sure to `git add` and `git commit` again once you have `new`, `create`, and
 
 ## Part III: Change a creature with `edit` (form) and `update` (database)
 
-![](https://camo.githubusercontent.com/9f3f575f52088b41954636a670b1d44b3eac9fb9/687474703a2f2f692e67697068792e636f6d2f31324b7856766a35415232556e652e676966)  
+![](https://aos.iacpublishinglabs.com/question/aq/700px-394px/how-long-is-a-caterpillar-in-a-cocoon_095bed7c-a98c-486d-b938-48e0b7ce39f2.jpg?domain=cx.aos.ask.com)
+
+<!-- ![](https://camo.githubusercontent.com/9f3f575f52088b41954636a670b1d44b3eac9fb9/687474703a2f2f692e67697068792e636f6d2f31324b7856766a35415232556e652e676966)   -->
 
 **Don't Give Up!!!**
 
@@ -642,7 +644,7 @@ The update route will use the `id` of the creature to be updated. In Express, yo
   </p>
 </details>
 
-Run `rake routes` in the Terminal to see the newly created update routes.
+Run `rails routes` or `rake routes` in the Terminal to see the newly created update routes.
 
 #### 5. Set up the creatures `update` action
 
@@ -691,7 +693,10 @@ Test your `creatures#update` method in the browser by editing the creature with 
 
 ## Part IV: Delete a creature with `destroy` (database)
 
-![](https://camo.githubusercontent.com/f0e4aa6a005ce35a3777c33d2445b3396be690f0/687474703a2f2f692e67697068792e636f6d2f6e53556e4f4c4a46324e6776362e676966)
+
+![](https://www.geek.com/wp-content/uploads/2016/03/bigfoot-625x440.jpg)
+
+<!-- ![](https://camo.githubusercontent.com/f0e4aa6a005ce35a3777c33d2445b3396be690f0/687474703a2f2f692e67697068792e636f6d2f6e53556e4f4c4a46324e6776362e676966) -->
 
 #### 1. Define a route to `destroy` a specific creature
 
