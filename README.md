@@ -549,7 +549,7 @@ Make sure to `git add` and `git commit` again once you have `new`, `create`, and
 
 ## Part III: Change a creature with `edit` (form) and `update` (database)
 
-![](https://aos.iacpublishinglabs.com/question/aq/700px-394px/how-long-is-a-caterpillar-in-a-cocoon_095bed7c-a98c-486d-b938-48e0b7ce39f2.jpg?domain=cx.aos.ask.com)
+<img src="https://aos.iacpublishinglabs.com/question/aq/700px-394px/how-long-is-a-caterpillar-in-a-cocoon_095bed7c-a98c-486d-b938-48e0b7ce39f2.jpg?domain=cx.aos.ask.com" width="70%">
 
 <!-- ![](https://camo.githubusercontent.com/9f3f575f52088b41954636a670b1d44b3eac9fb9/687474703a2f2f692e67697068792e636f6d2f31324b7856766a35415232556e652e676966)   -->
 
