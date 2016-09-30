@@ -6,13 +6,13 @@ class CreaturesController < ApplicationController
     @creatures = Creature.all
 
     # render the index view (it has access to instance variable)
-    render :index
+    # does render :index
   end
 
   # show the new creature form
   def new
     @creature = Creature.new
-    render :new
+    # does render :new
   end
 
   # create a new creature in the database
@@ -39,7 +39,7 @@ class CreaturesController < ApplicationController
     @creature = Creature.find_by_id(creature_id)
 
     # render the show view (it has access to instance variable)
-    render :show
+    # does render :show
   end
 
   # show the edit creature form
@@ -52,7 +52,7 @@ class CreaturesController < ApplicationController
     @creature = Creature.find_by_id(creature_id)
 
     # render the edit view (it has access to instance variable)
-    render :edit
+    # does render :edit
   end
 
   # update a creature in the database
