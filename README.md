@@ -13,26 +13,24 @@ It's time to put all your Rails knowledge into practice. In this project, you wi
 
 
 ### Workflow
-If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
 
 We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
 
-  1. Start by making a `first-run` branch: `git checkout -b first-run`. Move through the instructions below to build your bog app. Use as many hints as you'd like to check your work and make sure you get through the lab smoothly. Commit your work along the way and at the conclusion.
-  2. Reset your progress to the beginning by checking out master again `git checkout master` then make a `second-run` branch: `git checkout -b second-run`. Go through the lab another time. This time, time yourself on how long it takes you. Push yourself to peek at the hints more sparingly and code as much as you can on your own. Again, make sure to commit your work.
+  1. Start by making a `first-run` branch: `git checkout -b first-run`. Move through the instructions below to build your bog app. Use as many hints as you'd like to check your work and make sure you get through the lab smoothly. Commit your work along the way and at the conclusion. If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
+  2. Reset your progress to the beginning by checking out master again `git checkout master` then make a `second-run` branch: `git checkout -b second-run`. Go through the lab another time. This time, time yourself on how long it takes you. Push yourself to peek at the hints more sparingly and code as much as you can on your own. Try not reference the solutions branch; you can look at your own first branch if you're stuck.  Again, make sure to commit your work.
   3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around. Make sure you have roughly the same number of commits as you had on your second run. Version control isn't the place to cut corners!
-  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. This is the fourth time; streamline your process. Squash bugs faster and look at the resources less. Commit often and build it as fast as you can!
+  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. Time yourself. This is the fourth time; streamline your process. Squash bugs faster and try not to look at the resources. Commit often and build it as fast as you can! 
   
   
 <img src="https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966" width="40%">
 
-### Sharing
+### Submission
 
 When you're finished with your timed runs, edit the README on your master branch with an introduction paragraph that includes:
 
  - a 3-5 sentences reflection on how this went for you  
  - a tip for others to help conquer some part of the app that used to trip you up  
- - the times for your first and last runs   
- - the name of the branch you think is most complete  
+ - the times for your first and fourth runs     
   
 Add a link to your bog app repo on the "My Work" section of your personal website.
 
