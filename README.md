@@ -2,26 +2,27 @@
 
 ### Overview
 
-Everyone does blog apps. Now, you're going to work on a **bog app**. Researchers are collecting data on a local bog and need an app to quickly record field data. 
+Everyone does blog apps. Now, you're going to work on a **bog app**. Researchers are collecting data on a local bog and need an app to quickly record field data.
 
 ### Objectives
 
-It's time to put all your Rails knowledge into practice. In this project, you will:
-- Review **CRUD** in the context of a Rails application, especially **update** and **delete**.
-- Implement **form helpers** in a  Rails application.
-- Build memory for the steps required to create a Rails app. 
+It's time to put all your Rails knowledge into practice! In this project, you will:
+
+- Review **CRUD** in the context of a Rails application.  
+- Implement **form helpers** in a  Rails application.  
+- Build memory for the steps required to create a Rails app.
 
 
 ### Workflow
 
-We want to format this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
+You'll work through this project as a "time trial." You will be building the app 4 times, each time gaining skills through repetition. Here's how we want you to work:
 
   1. Start by making a `first-run` branch: `git checkout -b first-run`. Move through the instructions below to build your bog app. Use as many hints as you'd like to check your work and make sure you get through the lab smoothly. Commit your work along the way and at the conclusion. If you get stuck at any point, feel free to reference the [solution branch](../../tree/solution).
   2. Reset your progress to the beginning by checking out master again `git checkout master` then make a `second-run` branch: `git checkout -b second-run`. Go through the lab another time. This time, time yourself on how long it takes you. Push yourself to peek at the hints more sparingly and code as much as you can on your own. Try not reference the solutions branch; you can look at your own first branch if you're stuck.  Again, make sure to commit your work.
   3. Reset your progress to the beginning by checking out master again `git checkout master` then make a `third-run` branch: `git checkout -b third-run`. Repeat the lab a third time. Try not to use the instructions to build your bog app and refer to them only when very stuck. Time yourself again and aim to build the app faster than you built it the second time around. Make sure you have roughly the same number of commits as you had on your second run. Version control isn't the place to cut corners!
-  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. Time yourself. This is the fourth time; streamline your process. Squash bugs faster and try not to look at the resources. Commit often and build it as fast as you can! 
-  
-  
+  4. Reset your progress to the beginning by checking out master again `git checkout master` then make a `fourth-run` branch: `git checkout -b fourth-run`. Time yourself. This is the fourth time; streamline your process. Squash bugs faster and try not to look at the resources. Commit often and build it as fast as you can!
+
+
 <img src="https://camo.githubusercontent.com/d758d1c1a85e7829d11df73ea25820533db881e7/687474703a2f2f692e67697068792e636f6d2f545467647a75545766784d566439716a4262712e676966" width="40%">
 
 ### Submission
@@ -31,7 +32,7 @@ When you're finished with your timed runs, edit the README on your master branch
  - a 3-5 sentences reflection on how this went for you  
  - a tip for others to help conquer some part of the app that used to trip you up  
  - the times for your first and fourth runs     
-  
+
 Add a link to your bog app repo on the "My Work" section of your personal website.
 
 
@@ -72,7 +73,8 @@ Fork this repo, and clone it into your wdi folder on your local machine. Change 
 
 ```zsh
 ➜  rails new bog_app -T -d postgresql
-➜  rake db:create
+➜  cd bog_app
+➜  rails db:create
 ➜  rails s
 ```
 
@@ -80,17 +82,18 @@ Your app should be up and running at `localhost:3000`.
 
 #### 2. Add Bootstrap to your project
 
-Rails handles CSS and JavaScript with a system called the asset pipeline. We'll go over it more next week, but for now, you'll add Bootstrap via the asset pipeline.
+Rails handles CSS and JavaScript with a system called the asset pipeline. We'll go over it more next week, but for now, here's how to add Bootstrap CSS using the asset pipeline.
 
 Third-party libraries belong in the `vendor/assets` sub-directory of your Rails app. You'll need to download a Bootstrap CSS file and add it to this directory.  
 
-One way you can do that is to use the following Terminal command to download the Bootstrap CSS file (via `curl`) and save it in a new `bootstrap-3.3.6.min.css` file inside the `vendor/assets/stylesheets` sub-directory. You may want to find and use the most recent version of Bootstrap if it's no longer 3.3.6. 
+One way you can do that is to use the following Terminal command to download the Bootstrap CSS file (via `curl`) and save it in a new `bootstrap-3.3.6.min.css` file inside the `vendor/assets/stylesheets` sub-directory. You may want to find and use the most recent version of Bootstrap if it's no longer 3.3.6.
 
 ```zsh
 ➜  curl https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css > vendor/assets/stylesheets/bootstrap-3.3.6.min.css
 ```
+You should see that that file is now in your project's directory.
 
-To include the Bootstrap file you just downloaded, require it in `app/assets/stylesheets/application.css`:
+To include the CSS from the Bootstrap file you just downloaded into your pages, require it in `app/assets/stylesheets/application.css`:
 
 ```css
 /*
@@ -98,7 +101,6 @@ To include the Bootstrap file you just downloaded, require it in `app/assets/sty
  */
 
 /*
- * ...
  *
  *= require bootstrap-3.3.6.min
  *= require_tree .
@@ -149,7 +151,7 @@ Your routes tell your app how to direct **HTTP requests** to **controller action
 
 
 
-In the Terminal, running `rails routes` or `rake routes` will list all your routes. You'll see that some routes have a "prefix" listed. These routes have associated route helpers, which are methods Rails creates to generate URLs. The format of a route helper is `prefix_path`. For example, `creatures_path` is the full route helper for `GET /creatures` (the creatures index). We often use route helpers to generate URLs in forms, links, and controllers.
+In the Terminal, running `rails routes` will list all your routes. You'll see that some routes have a "prefix" listed. These routes have associated route helpers, which are methods Rails creates to generate URLs. The format of a route helper is `prefix_path`. For example, `creatures_path` is the full route helper for `GET /creatures` (the creatures index). We often use route helpers to generate URLs in forms, links, and controllers.
 
 #### 4. Set up the creatures controller and `index` action
 
@@ -173,12 +175,12 @@ Next, define the `creatures#index` action in the creatures controller. The varia
       # get all creatures from db and save to instance variable
       @creatures = Creature.all
       # render the index view (it has access to instance variable)
-      render :index
+      # remember the default behavior is to render :index
     end
   end
   ```
 </details>
-  
+
 
 
 
@@ -193,12 +195,12 @@ Run the following command in the Terminal to generate the `Creature` model:
 Run the migration to update the database with this change:
 
 ```zsh
-➜  rake db:migrate
+➜  rails db:migrate
 ```
 
 #### 6. Create a creature
 
-In the Terminal, enter the Rails console. The Rails console is built on top of `irb`, and it has access to your Rails project. Use it to create a new instance of a creature.
+In the Terminal, enter the Rails console. The Rails console is built on top of `irb`, and it has access to your Rails project. Use it to create a new instance of a creature.  This just lets us confirm that the model class is set up and the migration has run successfully.
 
 ```zsh
 ➜  rails c
@@ -220,7 +222,7 @@ Creature.create({name: "Luke", description: "Jedi"})
 Creature.create({name: "Darth Vader", description: "Father of Luke"})
 ```
 
-In the Terminal (not inside rails console!), run `rake db:seed`. Note that the seeds file will also run every time you run `rake db:reset` to reset your database.
+In the Terminal (not inside rails console!), run `rails db:seed`. Note that the seed file will also run every time you run `rails db:reset` to reset your database.
 
 #### 8. Set up the creatures `index` view
 
@@ -294,7 +296,7 @@ When a user sends a GET request to `/creatures/new`, your server will search for
 
     # show the new creature form
     def new
-      render :new
+      # remember the default behavior is to render :new
     end
 
   end
@@ -407,7 +409,7 @@ Update your `creatures#new` action to send a new instance of a `Creature` to the
     # show the new creature form
     def new
       @creature = Creature.new
-      render :new
+      # remember the default behavior is to render :new
     end
 
   end
@@ -485,7 +487,7 @@ Now that you have your `show` route, set up the controller action for `creatures
       @creature = Creature.find_by_id(creature_id)
 
       # render the show view (it has access to instance variable)
-      render :show
+      # remember the default behavior is to render :show
     end
 
   end
@@ -609,7 +611,7 @@ Using your `creatures#new` and `creatures#show` method as inspiration, you can w
       @creature = Creature.find_by_id(creature_id)
 
       # render the edit view (it has access to instance variable)
-      render :edit
+      # remember the default behavior is to render :edit
     end
 
   end
@@ -664,7 +666,7 @@ The update route will use the `id` of the creature to be updated. In Express, yo
   </p>
 </details>
 
-Run `rails routes` or `rake routes` in the Terminal to see the newly created update routes.
+Run `rails routes` in the Terminal to see the newly created update routes.
 
 #### 5. Set up the creatures `update` action
 
