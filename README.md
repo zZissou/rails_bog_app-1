@@ -711,7 +711,57 @@ In the `CreaturesController`, define an `update` method:
   </p>
 </details>
 
-Test your `creatures#update` method in the browser by editing the creature with an `id` of 1 (go to `localhost:3000/creatures/1/edit`). Then, `git add` and `git commit` your work.
+#### 6. Refactor whitelisted `params`.
+
+Now that `params` are whitelisted in two different places in the `CreaturesController`, refactor so that these params are set up in their own method.   This method can (and should!) be `private` because it will only ever be used inside the `CreaturesController` class definition.
+
+<details>
+  <summary>Hint:</summary>
+  <p>
+
+  ```ruby
+  #
+  # app/controllers/creatures_controller.rb
+  #
+
+  class CreaturesController < ApplicationController
+
+    ...
+
+    # update a creature in the database
+    def update
+      # get the creature id from the url params
+      creature_id = params[:id]
+
+      # use `creature_id` to find the creature in the database
+      # and save it to an instance variable
+      creature = Creature.find_by_id(creature_id)
+
+      # update the creature
+      creature.update_attributes(creature_params)  # this now calls the private method below!
+
+      # redirect to show page for the updated creature
+      redirect_to creature_path(creature)
+      # redirect_to creature_path(creature) is equivalent to:
+      # redirect_to "/creatures/#{creature.id}"
+    end
+    
+    private
+    
+    def creature_params
+      # whitelist params return whitelisted version
+      params.require(:creature).permit(:name, :description) 
+    end
+
+  end
+  ```
+  </p>
+</details>
+
+Refactor the `create` action to use this private method as well. 
+
+
+Manually re-test your `creatures#create` method in the browser. Then, test your `creatures#update` method in the browser by editing the creature with an `id` of 1 (go to `localhost:3000/creatures/1/edit`). Then, `git add` and `git commit` your work.
 
 ## Part IV: Delete a creature with `destroy` (database)
 
@@ -811,15 +861,13 @@ Visit `localhost:3000/creatures/1` in the browser, and inspect the HTML for the 
 
 At this point, you've created all the RESTful routes, implemented controller actions for each route, and made views for `index`, `show`, `new`, and `edit`. You've also created the `Creature` model in the database and manually tested that everything works.
 
-## Bonus
+## Additional Development Ideas
 
-* Add a Bootstrap `navbar` with links to the homepage (`/`) and the new creatures page (`/creatures/new`). Also link each creature on `creatures#index` to its individual `show` page.
+* Add links to other pages to help users navigate your site. For instance, a creature show page might have a link to the creatures index page. Use `link_to`.  Also link each creature on `creatures#index` to its individual `show` page.
+* If you'd like, add a Bootstrap `navbar` with links to the homepage (`/`) and the new creatures page (`/creatures/new`). This navbar should show up on every page. 
 * Read about [Active Record Validations](http://guides.rubyonrails.org/active_record_validations.html), and add validations to the `Creature` model to make sure a new creature can't be created without a `name` and `description`.
 * Read the docs for the [Paperclip gem](https://github.com/thoughtbot/paperclip), and incorporate it into your Bog App to upload photos of creatures locally.
 
-## Submission
-
-Once you've finished the assignment and pushed your work to GitHub, make a pull request from your fork to the original repo.
 
 ## CONGRATULATIONS! You have created a Bog App! Take a break, you look *Swamped*!
 
