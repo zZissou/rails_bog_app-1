@@ -247,6 +247,30 @@ Inside your creatures index view, iterate through all the creatures in the datab
 </details>
 <br>
 
+#### 9. Update the layout to use Bootstrap classes.
+
+Bootstrap is set up in this project, but it's not used yet.  In your application's main layout (`app/views/layouts/application.html.erb`), add the basic structure container/row/column structure Bootstrap uses, around the `<%= yield %>`.
+
+<details>
+  <summary>Here's one way that could look:</summary>
+  <p>
+  ```html
+  <!-- app/views/layouts/application.html.erb -->
+  <!--  ...  -->
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+  ```
+  </p>
+</details>
+<br>
+
 Go to `localhost:3000` in the browser. What do you see on the page? If you haven't already, `git add` and `git commit` the work you've done so far.
 
 ## Part II: Make a creature with `new` (form) and `create` (database)
