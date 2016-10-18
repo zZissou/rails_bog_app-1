@@ -294,8 +294,8 @@ The Rails convention is to make a form for new creatures at the `/creatures/new`
   Rails.application.routes.draw do
     root to: "creatures#index"
 
-    get "/creatures", to: "creatures#index"
-    get "/creatures/new", to: "creatures#new"
+    get "/creatures", to: "creatures#index", as: "creatures"
+    get "/creatures/new", to: "creatures#new", as: "new_creature"
   end
   ```
   </p>
