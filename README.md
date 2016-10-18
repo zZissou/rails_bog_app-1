@@ -715,7 +715,6 @@ In the `CreaturesController`, define an `update` method:
       creature_id = params[:id]
 
       # use `creature_id` to find the creature in the database
-      # and save it to an instance variable
       creature = Creature.find_by_id(creature_id)
 
       # whitelist params and save them to a variable
